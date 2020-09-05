@@ -9,56 +9,79 @@
 	var greenVal = 0
 	var blueVal = 0
 
-	$("#redvalue").mousedown(function() {
-		mouseDown = true;
-		updateSliders()
-	});
-	$("#greenvalue").mousedown(function() {
-		mouseDown = true;
-		updateSliders()
-	});
-	$("#bluevalue").mousedown(function() {
-		mouseDown = true;
-		updateSliders()
-	});
-
-
-	$("#redvalue").mouseup(function() {
-		mouseDown = false;
-	});
-	$("#greenvalue").mouseup(function() {
-		mouseDown = false;
-	});
-	$("#bluevalue").mouseup(function() {
-		mouseDown = false;
-	});
+	$(document).on('input change', '#redvalue', function() {
+		updateSliders();
+	})
+	$(document).on('input change', '#greenvalue', function() {
+		updateSliders();
+	})
+	$(document).on('input change', '#bluevalue', function() {
+		updateSliders();
+	})
 
 	function updateSliders() {
-		if (mouseDown) {
-			redVal = $("#redvalue").val();
-			greenVal = $("#greenvalue").val();
-			blueVal = $("#bluevalue").val();
+		redVal = $("#redvalue").val();
+		greenVal = $("#greenvalue").val();
+		blueVal = $("#bluevalue").val();
 
 
-			$("#redval").css('color', 'rgb(' + redVal + ', 0, 0)');
-			$("#greenval").css('color', 'rgb(0, ' + greenVal + ', 0)');
-			$("#blueval").css('color', 'rgb(0, 0, ' + blueVal+ ')');
+		$("#redval").css('color', 'rgb(' + redVal + ', 0, 0)');
+		$("#greenval").css('color', 'rgb(0, ' + greenVal + ', 0)');
+		$("#blueval").css('color', 'rgb(0, 0, ' + blueVal+ ')');
 
-			$("#outcolor").css('color', 'rgb(' + redVal + ', ' + greenVal + ', ' + blueVal + ')');
-			setTimeout(updateSliders(), 50);
-		}
+		$("#outcolor").css('color', 'rgb(' + redVal + ', ' + greenVal + ', ' + blueVal + ')');
+		
+	}
+
+	function submitRGB(){
+		console.log("submitted " + redVal + ", " + greenVal + ", " + blueVal)
+		$.ajax({
+			url: '/solidrgb',
+			type: 'POST',
+			contentType: "application/json;charset=utf-8",
+			traditional: "true",
+			data: JSON.stringify({'red': redVal, 'green': greenVal, 'blue': blueVal}),
+			dataType: "json",
+		}).done(function(result) {
+			console.log(result)
+		})
 	}
 	</script>
 	</head>
 	<body>
+		<div class="rgbsliders" id="rgbsliders">
+			<table>
+				<tr>
+					<td>
+						<label id="redval">RED</label>
+						<input type="range" value=0 min=0 max=255 id="redvalue" class="slider">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label id="greenval">GREEN</label>
+						<input type="range" value=0 min=0 max=255 id="greenvalue" class="slider">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label id="blueval">BLUE</label>
+						<input type="range" value=0 min=0 max=255 id="bluevalue" class="slider"> 
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label id="outcolor">LED COLOR</label>
+					</td>
+					<td>
+						<button onclick="submitRGB()">Send RGB to LEDs</button>
+					</td>
+				</tr>
 		
-	<label id="redval">RED</label>
-	<input type="range" value=0 min=0 max=255 id="redvalue">
-	<label id="greenval">GREEN</label>
-	<input type="range" value=0 min=0 max=255 id="greenvalue">
-	<label id="blueval">BLUE</label>
-	<input type="range" value=0 min=0 max=255 id="bluevalue">
-	<label id="outcolor">LED COLOR</label>
+	</table>
+		</div>
+	
+	
 	</body>
 </html>
 
