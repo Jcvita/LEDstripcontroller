@@ -7,9 +7,11 @@ import time
 ser = serial.Serial('/dev/ttyUSB0', baudrate=115200)
 
 def main():
-    while True:
+    ser.open()
+    while ser.inWaiting():
         time.sleep(2000)
         ser.write(b'f')
+    print(ser.read().decode())
 
 if __name__ == '__main__':
     main()
