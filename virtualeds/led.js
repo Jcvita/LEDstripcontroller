@@ -1,14 +1,14 @@
-function Led(col) {
+function Led() {
     this.r = 0;
     this.g = 0;
     this.b = 0;
 
     this.row = 0
-    this.col = col
+    this.col = 0
 
-    this.draw = function() {
+    this.draw = function(indx) {
         ctx.fillStyle = "#000000";
-        ctx.fillRect(this.row, this.col, scale, scale);
+        ctx.fillRect(indx*scale, this.row*scale, scale, scale);
     }
 
     this.setRGB = function(r, g, b) {
@@ -17,8 +17,8 @@ function Led(col) {
         this.b = b;
     }
 
-    this.update = function() {
+    this.update = function(indx) {
         ctx.fillStyle = "rgb(" + this.r + ", " + this.g + ", " + this.b + ")"
-        ctx.fillRect(this.row, this.col, scale, scale);
+        ctx.fillRect(indx*scale, this.row*scale, scale, scale);
     }
 }
