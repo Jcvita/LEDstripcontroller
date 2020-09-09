@@ -16,7 +16,7 @@ var num_leds = 60;
     window.setInterval(() => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         //update LEDs
-        leds.forEach(element => element.setRGB(255, 0, 0))
+        leds.forEach(element => element.setRGB(Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255)))
         
         leds.forEach(element => element.update())
     }, 250);
