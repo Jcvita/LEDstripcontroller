@@ -24,10 +24,11 @@
 		greenVal = $("#greenvalue").val();
 		blueVal = $("#bluevalue").val();
 
-
 		$("#redval").css('color', 'rgb(' + redVal + ', 0, 0)');
 		$("#greenval").css('color', 'rgb(0, ' + greenVal + ', 0)');
 		$("#blueval").css('color', 'rgb(0, 0, ' + blueVal+ ')');
+
+		$("#partyButton").css('background-color', 'rgb(' + redVal + ', ' + greenVal + ', ' + blueVal + ')');
 
 		$("#outcolor").css('color', 'rgb(' + redVal + ', ' + greenVal + ', ' + blueVal + ')');
 		
@@ -41,6 +42,20 @@
 			contentType: "application/json;charset=utf-8",
 			traditional: "true",
 			data: JSON.stringify({'red': redVal, 'green': greenVal, 'blue': blueVal}),
+			dataType: "json",
+		}).done(function(result) {
+			console.log(result)
+		})
+	}
+
+	function partyTime() {
+		console.log("ITS TIME TO PARTAYYY")
+		$.ajax({
+			url: '/partymode',
+			type: 'POST',
+			contentType: "application/json;charset=utf-8",
+			traditional: "true",
+			data: JSON.stringify({'freq': 2}),
 			dataType: "json",
 		}).done(function(result) {
 			console.log(result)
@@ -75,6 +90,11 @@
 					</td>
 					<td>
 						<button onclick="submitRGB()">Send RGB to LEDs</button>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<button onclick="partyTime()" id="partyButton">Party Mode!</button>
 					</td>
 				</tr>
 		
