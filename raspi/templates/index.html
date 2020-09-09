@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<script src="http://code.jquery.com/jquery-2.2.3.min.js"></script>
+	<script>
+	var mouseDown = false
+	var redVal = 0
+	var greenVal = 0
+	var blueVal = 0
+
+	$(document).on('input change', '#redvalue', function() {
+		updateSliders();
+	})
+	$(document).on('input change', '#greenvalue', function() {
+		updateSliders();
+	})
+	$(document).on('input change', '#bluevalue', function() {
+		updateSliders();
+	})
+
+	function updateSliders() {
+		redVal = $("#redvalue").val();
+		greenVal = $("#greenvalue").val();
+		blueVal = $("#bluevalue").val();
+
+
+		$("#redval").css('color', 'rgb(' + redVal + ', 0, 0)');
+		$("#greenval").css('color', 'rgb(0, ' + greenVal + ', 0)');
+		$("#blueval").css('color', 'rgb(0, 0, ' + blueVal+ ')');
+
+		$("#outcolor").css('color', 'rgb(' + redVal + ', ' + greenVal + ', ' + blueVal + ')');
+		
+	}
+
+	function submitRGB(){
+		console.log("submitted " + redVal + ", " + greenVal + ", " + blueVal)
+		$.ajax({
+			url: '/solidrgb',
+			type: 'POST',
+			contentType: "application/json;charset=utf-8",
+			traditional: "true",
+			data: JSON.stringify({'red': redVal, 'green': greenVal, 'blue': blueVal}),
+			dataType: "json",
+		}).done(function(result) {
+			console.log(result)
+		})
+	}
+	</script>
+	</head>
+	<body>
+		<div class="rgbsliders" id="rgbsliders">
+			<table>
+				<tr>
+					<td>
+						<label id="redval">RED</label>
+						<input type="range" value=0 min=0 max=255 id="redvalue" class="slider">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label id="greenval">GREEN</label>
+						<input type="range" value=0 min=0 max=255 id="greenvalue" class="slider">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label id="blueval">BLUE</label>
+						<input type="range" value=0 min=0 max=255 id="bluevalue" class="slider"> 
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label id="outcolor">LED COLOR</label>
+					</td>
+					<td>
+						<button onclick="submitRGB()">Send RGB to LEDs</button>
+					</td>
+				</tr>
+		
+	</table>
+		</div>
+	
+	
+	</body>
+</html>
+
