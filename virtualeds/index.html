@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Virtual LEDs</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="draw.js"></script>
+    <script src="led.js"></script>
+    <script>
+        
+    </script>
+</head>
+<body>
+    <label for="layout">Select Layout Type:</label>
+    <select name="layout" id="layout">
+        <option value="strip">Strip</option>
+    </select>
+    <div id="stripcanvas" class="canvasses">
+        <canvas
+        class="canvas"
+        height="10"
+        width="600">
+
+        </canvas>
+    </div>
+    <label for="commands">Enter commands:</label>
+    <textarea name="commands" id="commands" cols="50" rows="20"></textarea>
+    <button onclick="submitRGB()">Send RGB to LEDs</button>
+    <a href="documentation.html">documentation</a>
+</body>
+</html>
