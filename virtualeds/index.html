@@ -6,21 +6,22 @@
     <script src="draw.js"></script>
     <script src="led.js"></script>
     <script>
-        
+
     </script>
 </head>
 <body>
     <label for="layout">Select Layout Type:</label>
     <select name="layout" id="layout">
         <option value="strip">Strip</option>
-    </select>
+    </select><br><br>
     <div id="stripcanvas" class="canvasses">
         <canvas
         class="canvas"
+        id="canvas"
         height="10"
         width="600">
 
-        </canvas>
+        </canvas><br><br>
     </div>
     <label for="commands">Enter commands:</label>
     <textarea name="commands" id="commands" cols="50" rows="20"></textarea>
