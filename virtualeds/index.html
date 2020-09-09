@@ -4,11 +4,12 @@
     <title>Virtual LEDs</title>
 </head>
 <body>
-    <label for="layout">Select Layout Type:</label>
-    <select name="layout" id="layout">
-        <option value="strip">Strip</option>
+    <label for="options">Select Mode:</label>
+    <select name="options" id="options">
+        <option value="party">Party Mode</option>
+        <option value="cmdenter">Input Commands</option>
     </select><br><br>
-    <div id="stripcanvas" class="canvasses">
+    <div id="party" class="canvasses">
         <canvas
         class="canvas"
         id="canvas"
@@ -17,15 +18,24 @@
 
         </canvas><br><br>
     </div>
-    <label for="commands">Enter commands:</label>
-    <textarea name="commands" id="commands" cols="50" rows="20"></textarea>
-    <button onclick="">Send RGB to LEDs</button>
-    <a href="documentation.html">documentation</a>
+    <div id="cmdenter" class="cmddiv">
+        <label for="commands">Enter commands:</label>
+        <textarea name="commands" id="commands" cols="50" rows="20"></textarea>
+        <button onclick="">Send RGB to LEDs</button>
+        <br><br>
+        <a href="documentation.html">documentation</a>
+    </div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="led.js"></script>
 <script src="draw.js"></script>
 <script>
-
+$(document).ready(function() {
+    $('#cmdenter').hide();
+    $('#options').change(function() {
+        $('#cmdenter').hide();
+        $('#' + $(this).val()).show();
+    })
+})
 </script>
 </html>

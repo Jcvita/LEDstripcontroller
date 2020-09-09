@@ -6,7 +6,6 @@ const columns = canvas.width / scale;
 var leds = [];
 var num_leds = 60;
 
-
 (function setup() {
     document.getElementById("canvas").width = scale*num_leds;
     for (var i = 0; i < num_leds; i++){
