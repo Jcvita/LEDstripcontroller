@@ -21,7 +21,7 @@ def rainbow(freq):
     utils.do_action(action="rainbow", frequency=freq)
     return redirect(url_for("/"))
 
-@app.route("/fill/<rgb>", methods=["POST"))
+@app.route("/fill/<rgb>", methods=["POST"])
 def fill(rgb):
     utils.do_action(action="fill", color=rgb)
     return redirect(url_for("/"))

@@ -95,7 +95,7 @@ def do_action(**kwargs):
 
     r = RainbowCycleDaemon(kwargs['speed'])
     p = PartyDaemon(kwargs['party_frequency'])
-    a = AlertDaemon(kwargs['alert_color']
+    a = AlertDaemon(kwargs['alert_color'])
     rt = threading.Thread(target=r.rainbow, daemon=True, name='rainbow')
     pt = threading.Thread(target=p.party, daemon=True, name='party')
     at = threading.Thread(target=a.alert, daemon=True, name='alert')
