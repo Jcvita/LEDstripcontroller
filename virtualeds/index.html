@@ -6,6 +6,7 @@
 <body>
     <label for="options">Select Mode:</label>
     <select name="options" id="options">
+        <option value="rgbsliders">Solid RGB color</option>
         <option value="party">Party Mode</option>
         <option value="cmdenter">Input Commands</option>
     </select><br><br>
@@ -25,16 +26,54 @@
         <br><br>
         <a href="documentation.html">documentation</a>
     </div>
+    <div class="rgbsliders" id="rgbsliders">
+        <table>
+            <tr>
+                <td>
+                    <label id="redval">RED</label>
+                    <input type="range" value=0 min=0 max=255 id="redvalue" class="slider">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label id="greenval">GREEN</label>
+                    <input type="range" value=0 min=0 max=255 id="greenvalue" class="slider">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label id="blueval">BLUE</label>
+                    <input type="range" value=0 min=0 max=255 id="bluevalue" class="slider"> 
+                </td>
+            </tr>
+</table>
+    </div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="led.js"></script>
 <script src="draw.js"></script>
 <script>
+    var redVal = 0
+	var greenVal = 0
+    var blueVal = 0
+    
+    $(document).on('input change', '#redvalue', function() {
+		document.cookie = "r=" + $("#redvalue").val();
+	})
+	$(document).on('input change', '#greenvalue', function() {
+		document.cookie = "g=" + $("#greenvalue").val();
+	})
+	$(document).on('input change', '#bluevalue', function() {
+		document.cookie = "b=" + $("#bluevalue").val();
+    })
+    
 $(document).ready(function() {
     $('#cmdenter').hide();
     $('#options').change(function() {
+        $('#rgbsliders').hide();
         $('#cmdenter').hide();
         $('#' + $(this).val()).show();
+        document.cookie = "action=" + $(this).val();
     })
 })
 </script>
